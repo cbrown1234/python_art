@@ -1,2 +1,11 @@
 # Pycharm
 .idea/
+
+# Cache
+__pycache__/
+
+# Twitter
+twitter.yaml
+
+# Media
+font/

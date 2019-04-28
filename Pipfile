@@ -7,6 +7,8 @@ verify_ssl = true
 
 [packages]
 pillow = "*"
+python-twitter = "*"
+pyyaml = "*"
 
 [requires]
 python_version = "3.6"
