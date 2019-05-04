@@ -9,36 +9,37 @@ def make_list_art(phrases):
     opacity = 150
 
     # get a font
-    fnt = ImageFont.truetype('font/Amatic-Bold.ttf', 20)
+    fnt = ImageFont.truetype("font/Amatic-Bold.ttf", 20)
 
-    im = Image.new('RGBA', (n, m), (255, 255, 255))
+    im = Image.new("RGBA", (n, m), (255, 255, 255))
 
     for i, phrase in enumerate(phrases):
 
         # make a blank image for the text, initialized to transparent text color
-        txt = Image.new('RGBA', im.size, (255, 255, 255, 0))
+        txt = Image.new("RGBA", im.size, (255, 255, 255, 0))
 
         # get a drawing context
         draw = ImageDraw.Draw(txt)
 
-        draw.text(
-            (n/2, m/2),
-            phrase,
-            fill=(0, 51, 102, opacity),
-            font=fnt,
-        )
-        txt = txt.rotate(360*i/no_str)
+        draw.text((n / 2, m / 2), phrase, fill=(0, 51, 102, opacity), font=fnt)
+        txt = txt.rotate(360 * i / no_str)
 
         im = Image.alpha_composite(im, txt)
     return im
 
 
-list_of_strings = get_tweet_text(screen_name='UniOfSurrey')
+def main():
+    screen_name = input("Which twitter account would you like to base your art on?")
+    list_of_strings = get_tweet_text(screen_name=screen_name)
 
-latin1_list = [
-    tweet.encode("latin-1", "ignore").decode("latin-1")
-    for tweet in list_of_strings
-]
+    # quick hack to avoid encoding error
+    latin1_list = [
+        tweet.encode("latin-1", "ignore").decode("latin-1") for tweet in list_of_strings
+    ]
 
-art = make_list_art(latin1_list)
-art.show()
+    art = make_list_art(latin1_list)
+    art.show()
+
+
+if __name__ == "__main__":
+    main()
